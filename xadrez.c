@@ -1,68 +1,79 @@
 #include <stdio.h>
 
-// Desafio de Xadrez - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
-// O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
+#define STEPS 3
+
+void moveRook(int steps, const char *direction) {
+    if(steps <= 0)
+        return;
+    printf("%s\n", direction);
+    moveRook(steps - 1, direction);
+}
+
+void moveQueen(int steps, const char *direction) {
+    if(steps <= 0)
+        return;
+    printf("%s\n", direction);
+    moveQueen(steps - 1, direction);
+}
+
+void moveBishopRecursive(int steps, int current) {
+    if(current >= steps)
+        return;
+    printf("Cima\n");
+    printf("Direita\n");
+    moveBishopRecursive(steps, current + 1);
+}
+
+void moveBishopNestedLoops(int steps) {
+    for (int i = 0; i < steps; i++) {
+        for (int j = 0; j < 1; j++) {
+            printf("Cima\n");
+            printf("Direita\n");
+        }
+    }
+}
+
+void moveKnight() {
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            if(j == 0) {
+                printf("Cima\n");
+            } else {
+                if(i == 1) {
+                    printf("Direita\n");
+                }
+                break;
+            }
+        }
+    }
+}
 
 int main() {
-    // Nível Novato - Movimentação das Peças
-    // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
+    printf("Movimento da Torre:\n");
+    moveRook(STEPS, "Cima");
+    moveRook(STEPS, "Baixo");
+    moveRook(STEPS, "Esquerda");
+    moveRook(STEPS, "Direita");
+    printf("\n");
 
-    int towerMovement = 5;
+    printf("Movimento da Rainha:\n");
+    moveQueen(STEPS, "Cima");
+    moveQueen(STEPS, "Baixo");
+    moveQueen(STEPS, "Esquerda");
+    moveQueen(STEPS, "Direita");
+    printf("\n");
 
-    for (int i = 0; i < towerMovement; i++) {
-        printf("Movimento da Torre: Direita\n");
-    }
+    printf("Movimento do Bispo (Recursivo):\n");
+    moveBishopRecursive(STEPS, 0);
+    printf("\n");
 
-    // convert to while
-    int bishopMovement = 5;
-    int j = 0;
+    printf("Movimento do Bispo (Loops Aninhados):\n");
+    moveBishopNestedLoops(STEPS);
+    printf("\n");
 
-    while (j < bishopMovement) {
-        printf("Movimento do Bispo: Cima, Direita\n");
-        j++;
-    }
-
-    int queenMovement = 8;
-    int k = 0;
-
-    do {
-        printf("Movimento da Rainha: Esquerda\n");
-        k++;
-    } while (k < queenMovement);
-
-
-    int horseMovementOne = 2;
-    int horseMovementTwo = 1;
-
-    for (int l = 0; l < horseMovementTwo; l++) {
-        int m = 0;
-        while (m < horseMovementOne) {
-            printf("Movimento do Cavalo: Baixo\n");
-            m++;
-        }
-        printf("Movimento do Cavalo: Esquerda\n");
-    }
-
-    // Implementação de Movimentação do Bispo
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação do Bispo em diagonal.
-
-    // Implementação de Movimentação da Torre
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Torre para a direita.
-
-    // Implementação de Movimentação da Rainha
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Rainha para a esquerda.
-
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
-
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
-
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
+    printf("Movimento do Cavalo:\n");
+    moveKnight();
+    printf("\n");
 
     return 0;
 }
