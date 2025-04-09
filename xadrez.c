@@ -32,6 +32,18 @@ int main() {
     } while (k < queenMovement);
 
 
+    int horseMovementOne = 2;
+    int horseMovementTwo = 1;
+
+    for (int l = 0; l < horseMovementTwo; l++) {
+        int m = 0;
+        while (m < horseMovementOne) {
+            printf("Movimento do Cavalo: Baixo\n");
+            m++;
+        }
+        printf("Movimento do Cavalo: Esquerda\n");
+    }
+
     // Implementação de Movimentação do Bispo
     // Sugestão: Utilize uma estrutura de repetição para simular a movimentação do Bispo em diagonal.
 
